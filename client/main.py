@@ -1,7 +1,11 @@
 import socket
 
+BUFFER = 1024
+
 address = input('address: ')
 port = int(input('port: '))
+
+print('. . .')
 
 sock = socket.socket()
 
@@ -15,6 +19,6 @@ while True:
     if command == 'close\n':
         break
 
-    print(sock.recv(1024).decode('ascii'), end='')
+    print(sock.recv(BUFFER).decode('ascii'), end='')
 
 sock.close()
