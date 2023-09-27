@@ -12,11 +12,14 @@ sock = socket.socket()
 sock.connect((address, port))
 
 while True:
-    command = input('> ').strip() + '\n'
+    command = ' '.join(input('> ').split()) + '\n'
+
+    if command == '\n':
+        continue
 
     sock.send(command.encode('ascii'))
 
-    if command == 'close\n':
+    if command == 'quit\n' or command == 'close\n':
         break
 
     print(sock.recv(BUFSIZ).decode('ascii'), end='')
