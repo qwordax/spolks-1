@@ -9,7 +9,7 @@ port = int(input('port: '))
 
 logging.basicConfig(
     level=logging.INFO,
-    format='%(levelname)-8s%(message)s'
+    format='%(levelname)-7s : %(message)s'
     )
 
 print('. . .')
@@ -24,7 +24,7 @@ working = True
 
 while working:
     conn, address = sock.accept()
-    logging.info(f'accepted {address}')
+    logging.info(f'accepted {address[0] + ":" + str(address[1])}')
 
     while True:
         command = conn.recv(BUFSIZ).decode('ascii')
@@ -39,16 +39,16 @@ while working:
         if command[:4] == 'echo':
             logging.info(command.strip())
             response = '\n'.join(command[5:].split()) + '\n'
-        elif command[:4] == 'time':
+        elif command[:5] == 'time\n':
             logging.info(command.strip())
             response = time.ctime() + '\n'
         else:
             logging.warning(f'unknown command \'{command.strip()}\'')
-            response = '\n'
+            response = f'unknown command \'{command.strip()}\'\n'
 
         conn.send(response.encode('ascii'))
 
-    logging.info(f'closed {address}')
+    logging.info(f'closed {address[0] + ":" + str(address[1])}')
     conn.close()
 
 sock.close()
