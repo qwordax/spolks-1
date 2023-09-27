@@ -1,7 +1,7 @@
 import socket
 import time
 
-BUFFER = 1024
+BUFSIZ = 1024
 
 address = input('address: ')
 port = int(input('port: '))
@@ -20,7 +20,7 @@ while working:
     conn, address = sock.accept()
 
     while True:
-        command = conn.recv(BUFFER).decode('ascii')
+        command = conn.recv(BUFSIZ).decode('ascii')
 
         if command == 'close\n':
             working = False
