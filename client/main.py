@@ -19,7 +19,7 @@ while True:
 
     sock.send(command.encode('ascii'))
 
-    if command == 'quit\n' or command == 'close\n':
+    if command == 'close\n' or command == 'exit\n' or command == 'quit\n':
         break
 
     print(sock.recv(BUFSIZ).decode('ascii'), end='')

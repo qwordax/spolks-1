@@ -29,11 +29,11 @@ while working:
     while True:
         command = conn.recv(BUFSIZ).decode('ascii')
 
-        if command == 'quit\n':
-            break
-
         if command == 'close\n':
             working = False
+            break
+
+        if command == 'exit\n' or command == 'quit\n':
             break
 
         if command[:4] == 'echo':
