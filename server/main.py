@@ -50,3 +50,5 @@ while working:
 
     logging.info(f'closed {address}')
     conn.close()
+
+sock.close()
